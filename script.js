@@ -9,7 +9,6 @@ fetch(urlAll)
         select = document.getElementById("payss")
         for (let i = 0; i < pays.length; i++) {
             let option = document.createElement("option")
-            option.id = "icon"
             option.value = pays[i]
             option.innerHTML = pays[i]
             select.appendChild(option)
@@ -21,8 +20,9 @@ fetch(urlAll)
 
 let vide = document.getElementById("vide")
 select.addEventListener("change", function () {
-
+    
     url = `https://restcountries.com/v3.1/name/${select.value}`
+    vide.style.display = "block"
 
     fetch(url)
         .then(response => response.json())
@@ -32,20 +32,22 @@ select.addEventListener("change", function () {
             let capital = data[0].capital ? data[0].capital[0] : null
             let population = data[0].population.toLocaleString()
             let region = data[0].region
-            if (region === "Oceania") {
-                region = "Oceanie"
-            }
-            if (region === "Europa") {
-                region = "Europe" 
-            }
-            if (region === "Asia") {
-                region = "Asie"
-            }
-            if (region === "Africa") {
-                region = "Afrique"
-            }
-            if (region === "Americas") {
-                region = "Amérique"
+            switch (region) {
+                case "Oceania":
+                    region = "Oceanie";
+                    break;
+                case "Europa":
+                    region = "Europe";
+                    break;
+                case "Asia":
+                    region = "Asie";
+                    break;
+                case "Africa":
+                    region = "Afrique";
+                    break;
+                case "Americas":
+                    region = "Amérique";
+                    break;
             }
             let drapeau = data[0].flags.png
             vide.innerHTML =
