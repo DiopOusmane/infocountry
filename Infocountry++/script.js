@@ -29,17 +29,32 @@ select.addEventListener("change", function () {
         .then(data => {
             console.log(data)
             let nom = data[0].name.common
-            let capital = data[0].capital[0]
+            let capital = data[0].capital ? data[0].capital[0] : null
             let population = data[0].population.toLocaleString()
             let region = data[0].region
+            if (region === "Oceania") {
+                region = "Oceanie"
+            }
+            if (region === "Europa") {
+                region = "Europe" 
+            }
+            if (region === "Asia") {
+                region = "Asie"
+            }
+            if (region === "Africa") {
+                region = "Afrique"
+            }
+            if (region === "Americas") {
+                region = "Amérique"
+            }
             let drapeau = data[0].flags.png
             vide.innerHTML =
                 `<h3><strong> ${nom}</strong> </h3>
             <img src="${drapeau}" alt='drapeau'/>
             <div id="info2">
-            <h4>La capital est :  ${capital}</h4>
             <h4>La population est de :<br> ${population} habitants</h4>
-            <h4>La continent est : ${region}</h4>
+            ${capital ? `<h4>La capitale est :  ${capital}</h4>` : `<h4>Ce pays n'a pas de capitale officielle.</h4>`}
+            <h4>La region est : ${region}</h4>
             </div>`
 
         })
