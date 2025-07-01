@@ -9,6 +9,7 @@ fetch(urlAll)
         select = document.getElementById("payss")
         for (let i = 0; i < pays.length; i++) {
             let option = document.createElement("option")
+            option.id = "icon"
             option.value = pays[i]
             option.innerHTML = pays[i]
             select.appendChild(option)
@@ -32,11 +33,14 @@ select.addEventListener("change", function () {
             let population = data[0].population.toLocaleString()
             let region = data[0].region
             let drapeau = data[0].flags.png
-            vide.innerHTML = `<h3><strong> ${nom}</strong> </h3>
+            vide.innerHTML =
+                `<h3><strong> ${nom}</strong> </h3>
             <img src="${drapeau}" alt='drapeau'/>
-            <div id="info2"><h4>La population est de :<br> ${population} habitants</h4>
-            <h4>La capital est :  ${capital}</h4><br>
-            <h4>La region est : ${region}</h4></div>`
+            <div id="info2">
+            <h4>La capital est :  ${capital}</h4>
+            <h4>La population est de :<br> ${population} habitants</h4>
+            <h4>La continent est : ${region}</h4>
+            </div>`
 
         })
         .catch(error => console.error('Error:', error));
